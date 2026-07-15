@@ -24,17 +24,14 @@ jobs:
       - name: Build Angular app
         run: npx ng build --configuration production
 
-      - name: Show dist output
-        run: ls -R dist
-
       - name: Deploy to cPanel via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.civitas.co.ug
-          username: civitas
+          username: deploy@civitas.co.ug
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftps
           local-dir: dist/civitas/browser/
-          server-dir: ./public_html/
+          server-dir: /
           dangerous-clean-slate: true
