@@ -107,8 +107,16 @@ export class ProjectsComponent implements OnInit {
   }
 
   openLightbox(index: number): void {
-    this.lightboxImages = this.filteredImages.map(img => img.url);
-    this.lightboxIndex = index;
+    const clickedImage = this.filteredImages[index];
+    if (!clickedImage) return;
+
+    // Isolate only the images belonging to this specific project
+    const projectImages = this.allImages.filter(img => img.projectId === clickedImage.projectId);
+    
+    this.lightboxImages = projectImages.map(img => img.url);
+    this.lightboxIndex = projectImages.findIndex(img => img.url === clickedImage.url);
+    if (this.lightboxIndex === -1) this.lightboxIndex = 0;
+    
     this.showLightbox = true;
   }
 }
