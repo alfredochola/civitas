@@ -31,7 +31,7 @@ jobs:
           username: civitas
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
-          protocol: ftps
+          protocol: ftp
           local-dir: dist/civitas/browser/
           server-dir: /public_html/
           dangerous-clean-slate: true
