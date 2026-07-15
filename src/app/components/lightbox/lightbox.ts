@@ -9,8 +9,24 @@ import { CommonModule } from '@angular/common';
 })
 export class LightboxComponent {
   @Input() images: string[] = [];
-  @Input() currentIndex = 0;
+  
+  private _currentIndex = 0;
+  @Input() 
+  set currentIndex(val: number) {
+    this._currentIndex = val;
+    this.imageLoading = true;
+  }
+  get currentIndex(): number {
+    return this._currentIndex;
+  }
+
   @Output() close = new EventEmitter<void>();
+
+  imageLoading = true;
+
+  onImageLoad(): void {
+    this.imageLoading = false;
+  }
 
   @HostListener('window:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {

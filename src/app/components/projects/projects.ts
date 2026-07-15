@@ -27,10 +27,17 @@ export class ProjectsComponent implements OnInit {
   selectedStatus = 'all';
   selectedProject = 'all';
   
+  // Image load state tracking
+  imageLoadedMap: { [url: string]: boolean } = {};
+  
   // Lightbox state
   showLightbox = false;
   lightboxImages: string[] = [];
   lightboxIndex = 0;
+
+  onImageLoad(url: string): void {
+    this.imageLoadedMap[url] = true;
+  }
 
   constructor(private dataService: DataService) {}
 

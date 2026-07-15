@@ -40,10 +40,23 @@
     <div class="masonry-container" *ngIf="filteredImages.length > 0">
       <div class="masonry-item position-relative shadow-sm rounded overflow-hidden" *ngFor="let img of filteredImages; let i = index">
         <div class="masonry-img-wrapper" (click)="openLightbox(i)">
-          <img [src]="img.url" [alt]="img.projectName" class="img-fluid w-100 masonry-image" loading="lazy">
+          
+          <!-- Individual Image Loader Spinner -->
+          <div *ngIf="!imageLoadedMap[img.url]" class="image-loader-container d-flex align-items-center justify-content-center bg-light w-100 position-absolute top-0 start-0 h-100" style="z-index: 1;">
+            <div class="spinner-border spinner-border-sm text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
+          <img [src]="img.url" 
+               [alt]="img.projectName" 
+               class="img-fluid w-100 masonry-image" 
+               [class.loaded]="imageLoadedMap[img.url]"
+               (load)="onImageLoad(img.url)"
+               loading="lazy">
           
           <!-- Hover Overlay Details -->
-          <div class="masonry-overlay d-flex flex-column justify-content-end p-3 text-white">
+          <div class="masonry-overlay d-flex flex-column justify-content-end p-3 text-white" *ngIf="imageLoadedMap[img.url]">
             <span class="badge bg-warning text-dark align-self-start text-uppercase font-headings mb-2" style="font-size: 0.65rem;">
               {{ img.status }}
             </span>

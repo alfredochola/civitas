@@ -35,8 +35,17 @@
 }
 
 .masonry-image {
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   display: block;
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+.image-loader-container {
+  min-height: 250px;
 }
 
 .masonry-overlay {
