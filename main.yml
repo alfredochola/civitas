@@ -28,10 +28,10 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.civitas.co.ug
-          username: deploy@civitas.co.ug
+          username: civitas
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftps
           local-dir: dist/civitas/browser/
-          server-dir: /
+          server-dir: public_html/
           dangerous-clean-slate: true
