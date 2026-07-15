@@ -36,5 +36,5 @@ jobs:
           port: 21
           protocol: ftps
           local-dir: dist/civitas/browser/
-          server-dir: ./
+          server-dir: ./public_html/
           dangerous-clean-slate: true
