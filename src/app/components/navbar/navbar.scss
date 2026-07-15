@@ -1,0 +1,49 @@
+.nav-link {
+  font-weight: 500;
+  color: var(--brand-black) !important;
+  position: relative;
+  transition: color 0.3s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background-color: var(--brand-yellow);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after, &.active::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Exclude CTA/Contact button from hover lines */
+a.btn-brand-yellow.nav-link {
+  &::after {
+    display: none;
+  }
+  &:hover {
+    color: var(--brand-black) !important;
+  }
+}
+
+.dropdown-menu {
+  animation: fadeIn 0.25s ease-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid rgba(0, 0, 0, 0.03) !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

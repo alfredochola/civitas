@@ -1,0 +1,20 @@
+.service-item-card {
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.02) !important;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background-color: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+  }
+}
+
+.icon-circle {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.hover-yellow:hover {
+  color: var(--brand-yellow) !important;
+}

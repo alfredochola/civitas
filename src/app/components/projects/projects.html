@@ -1,0 +1,71 @@
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <span class="text-uppercase tracking-widest fw-bold font-headings text-secondary small" style="letter-spacing: 2px;">Portfolio</span>
+    <h1 class="display-5 fw-bold text-dark font-headings mt-2">ARCHITECTURAL & CONSTRUCTION PORTFOLIO</h1>
+    <p class="text-muted mx-auto" style="max-width: 600px;">
+      Explore our comprehensive collection of design plans, renovations, and completed structures. Click any thumbnail to expand full-resolution photos.
+    </p>
+  </div>
+
+  <!-- Loading State -->
+  <app-spinner [isLoading]="isLoading" message="Fetching projects and drawings..."></app-spinner>
+
+  <div *ngIf="!isLoading">
+    <!-- Visually Appealing Filter Panel -->
+    <div class="card border-0 filter-card p-3 shadow-sm mb-4">
+      <div class="d-flex flex-row align-items-center justify-content-center gap-2 gap-sm-3">
+        
+        <!-- Status Dropdown -->
+        <div class="d-flex align-items-center flex-grow-1 flex-sm-grow-0" style="max-width: 220px;">
+          <span class="small fw-bold text-uppercase text-dark font-headings me-2 d-none d-sm-inline" style="white-space: nowrap;">Status:</span>
+          <select class="form-select filter-select bg-white font-body" [value]="selectedStatus" (change)="setFilterStatus($any($event.target).value)">
+            <option value="all">All Statuses</option>
+            <option *ngFor="let s of getUniqueStatuses()" [value]="s" class="text-capitalize">{{ s }}</option>
+          </select>
+        </div>
+
+        <!-- Project Dropdown -->
+        <div class="d-flex align-items-center flex-grow-1 flex-sm-grow-0" style="max-width: 250px;">
+          <span class="small fw-bold text-uppercase text-dark font-headings me-2 d-none d-sm-inline" style="white-space: nowrap;">Project:</span>
+          <select class="form-select filter-select bg-white font-body" [value]="selectedProject" (change)="setFilterProject($any($event.target).value)">
+            <option value="all">All Projects</option>
+            <option *ngFor="let p of projects" [value]="p.id">{{ p.name }}</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="masonry-container" *ngIf="filteredImages.length > 0">
+      <div class="masonry-item position-relative shadow-sm rounded overflow-hidden" *ngFor="let img of filteredImages; let i = index">
+        <div class="masonry-img-wrapper" (click)="openLightbox(i)">
+          <img [src]="img.url" [alt]="img.projectName" class="img-fluid w-100 masonry-image" loading="lazy">
+          
+          <!-- Hover Overlay Details -->
+          <div class="masonry-overlay d-flex flex-column justify-content-end p-3 text-white">
+            <span class="badge bg-warning text-dark align-self-start text-uppercase font-headings mb-2" style="font-size: 0.65rem;">
+              {{ img.status }}
+            </span>
+            <h5 class="fw-bold font-headings mb-1" style="font-size: 1rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">{{ img.projectName }}</h5>
+            <div class="d-flex justify-content-between small text-white-50" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
+              <span><i class="bi bi-aspect-ratio me-1"></i>{{ img.area }}</span>
+              <span><i class="bi bi-zoom-in me-1"></i>View</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="text-center py-5" *ngIf="filteredImages.length === 0">
+      <i class="bi bi-image text-muted display-4 mb-3"></i>
+      <h4 class="fw-bold font-headings">No Images Found</h4>
+      <p class="text-secondary small">Try adjusting your filters or search terms.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Standalone Lightbox Component -->
+<app-lightbox *ngIf="showLightbox" [images]="lightboxImages" [currentIndex]="lightboxIndex" (close)="showLightbox = false">
+</app-lightbox>

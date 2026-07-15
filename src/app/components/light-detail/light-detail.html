@@ -1,0 +1,130 @@
+<div class="container py-5">
+  <!-- Back to Catalog Link -->
+  <div class="mb-4">
+    <a routerLink="/lights" class="text-decoration-none text-dark fw-bold font-headings hover-yellow d-inline-flex align-items-center">
+      <i class="bi bi-arrow-left me-2"></i> BACK TO LIGHTS CATALOG
+    </a>
+  </div>
+
+  <!-- Loading State -->
+  <app-spinner [isLoading]="isLoading" message="Loading product details..."></app-spinner>
+
+  <div *ngIf="!isLoading && light">
+    <div class="row g-5">
+      <!-- Left Column: Product Gallery -->
+      <div class="col-lg-6">
+        <div class="product-gallery">
+          <!-- Main Display Image -->
+          <div class="main-image-preview bg-light shadow-sm rounded overflow-hidden mb-3 position-relative" (click)="openLightbox(light.images.indexOf(activeImage))">
+            <img [src]="activeImage" [alt]="light.productName" class="img-fluid w-100 main-preview-img">
+            <div class="preview-img-overlay d-flex align-items-center justify-content-center">
+              <i class="bi bi-zoom-in text-white fs-1"></i>
+            </div>
+          </div>
+          
+          <!-- Thumbnails Row -->
+          <div class="row g-2" *ngIf="light.images && light.images.length > 1">
+            <div class="col-3" *ngFor="let img of light.images; let i = index">
+              <div class="thumbnail-wrapper rounded overflow-hidden border" [class.active]="activeImage === img" (click)="setActiveImage(img)">
+                <img [src]="img" [alt]="light.productName + ' thumbnail'" class="img-fluid w-100 thumbnail-img">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Specs and Checkout -->
+      <div class="col-lg-6">
+        <span class="badge bg-warning text-dark font-headings text-uppercase px-3 py-2 mb-3">Civitas Lighting Collection</span>
+        <h1 class="display-6 fw-bold font-headings mb-3 text-dark">{{ light.productName }}</h1>
+        
+        <!-- Description -->
+        <div class="mb-4">
+          <h5 class="fw-bold font-headings text-dark mb-2">Description</h5>
+          <p class="text-muted font-body" style="line-height: 1.7; font-size: 0.95rem;">
+            {{ light.description }}
+          </p>
+        </div>
+
+        <!-- WhatsApp Checkout CTA -->
+        <div class="d-grid mb-5">
+          <a [href]="getWhatsAppUrl()" target="_blank" class="btn btn-brand-yellow btn-lg py-3 text-uppercase fw-bold font-headings d-flex align-items-center justify-content-center">
+            <i class="bi bi-whatsapp me-2 fs-4"></i> Place Order via WhatsApp
+          </a>
+          <span class="text-muted small text-center mt-2 font-body"><i class="bi bi-info-circle me-1"></i>Secure catalog checkout via official WhatsApp Contact</span>
+        </div>
+
+        <!-- Specifications Sheet -->
+        <div>
+          <h5 class="fw-bold font-headings text-dark mb-3 border-bottom pb-2">Technical Specifications</h5>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover small">
+              <tbody>
+                <tr *ngIf="light.colour">
+                  <th scope="row" class="w-35 font-headings py-2">Colour</th>
+                  <td class="text-muted py-2">{{ light.colour }}</td>
+                </tr>
+                <tr *ngIf="light.material">
+                  <th scope="row" class="font-headings py-2">Material</th>
+                  <td class="text-muted py-2">{{ light.material }}</td>
+                </tr>
+                <tr *ngIf="light.dimensions">
+                  <th scope="row" class="font-headings py-2">Dimensions</th>
+                  <td class="text-muted py-2">{{ light.dimensions }}</td>
+                </tr>
+                <tr *ngIf="light.power">
+                  <th scope="row" class="font-headings py-2">Power rating</th>
+                  <td class="text-muted py-2">{{ light.power }}</td>
+                </tr>
+                <tr *ngIf="light.lumens">
+                  <th scope="row" class="font-headings py-2">Lumen output</th>
+                  <td class="text-muted py-2">{{ light.lumens }}</td>
+                </tr>
+                <tr *ngIf="light.powerSource">
+                  <th scope="row" class="font-headings py-2">Power Source</th>
+                  <td class="text-muted py-2">{{ light.powerSource }}</td>
+                </tr>
+                <tr *ngIf="light.voltage">
+                  <th scope="row" class="font-headings py-2">Voltage</th>
+                  <td class="text-muted py-2">{{ light.voltage }}</td>
+                </tr>
+                <tr *ngIf="light.sensorAngle">
+                  <th scope="row" class="font-headings py-2">Sensor Angle</th>
+                  <td class="text-muted py-2">{{ light.sensorAngle }}</td>
+                </tr>
+                <tr *ngIf="light.sensorRange">
+                  <th scope="row" class="font-headings py-2">Sensor Range</th>
+                  <td class="text-muted py-2">{{ light.sensorRange }}</td>
+                </tr>
+                <tr *ngIf="light.ipRating">
+                  <th scope="row" class="font-headings py-2">IP Rating</th>
+                  <td class="text-muted py-2"><span class="badge bg-dark">{{ light.ipRating }}</span></td>
+                </tr>
+                <tr *ngIf="light.installation">
+                  <th scope="row" class="font-headings py-2">Installation</th>
+                  <td class="text-muted py-2">{{ light.installation }}</td>
+                </tr>
+                <tr *ngIf="light.functionalFeatures">
+                  <th scope="row" class="font-headings py-2">Features</th>
+                  <td class="text-muted py-2">{{ light.functionalFeatures }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Not Found State -->
+  <div class="text-center py-5" *ngIf="!isLoading && !light">
+    <i class="bi bi-exclamation-triangle text-warning display-3 mb-3"></i>
+    <h3 class="fw-bold font-headings">Product Not Found</h3>
+    <p class="text-secondary">The requested lighting fixture does not exist or has been removed.</p>
+    <a routerLink="/lights" class="btn btn-brand-yellow mt-3">Return to Catalog</a>
+  </div>
+</div>
+
+<!-- Standalone Lightbox Component -->
+<app-lightbox *ngIf="showLightbox" [images]="light ? light.images : []" [currentIndex]="lightboxIndex" (close)="showLightbox = false">
+</app-lightbox>

@@ -1,0 +1,118 @@
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(21, 21, 21, 0.92); /* #151515 at 90%+ opacity */
+  z-index: 2000; /* overlay above navbar */
+  user-select: none;
+}
+
+.btn-close-lightbox {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.2rem;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 5px;
+  z-index: 2100;
+
+  &:hover {
+    color: var(--brand-yellow);
+    transform: rotate(90deg);
+  }
+}
+
+.lightbox-content-container {
+  width: 100%;
+  height: 100%;
+  max-width: 90%;
+  position: relative;
+}
+
+.image-wrapper {
+  max-width: 80%;
+  max-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 2050;
+
+  &:hover {
+    background-color: var(--brand-yellow);
+    color: var(--brand-black);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  &.btn-prev {
+    left: 20px;
+  }
+
+  &.btn-next {
+    right: 20px;
+  }
+
+  @media (max-width: 576px) {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+
+    &.btn-prev {
+      left: 5px;
+    }
+
+    &.btn-next {
+      right: 5px;
+    }
+  }
+}
+
+.lightbox-caption {
+  font-family: var(--font-headings);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

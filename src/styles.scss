@@ -1,1 +1,118 @@
-/* You can add global styles to this file, and also import other style files */
+/* Civitas Brand Theme Variables */
+$primary-bg: #FFFFFF;
+$secondary-bg: #F7F5F6;
+$brand-black: #151515;
+$brand-yellow: #FCC517;
+
+:root {
+  --primary-bg: #{$primary-bg};
+  --secondary-bg: #{$secondary-bg};
+  --brand-black: #{$brand-black};
+  --brand-yellow: #{$brand-yellow};
+  --brand-yellow-hover: #e0b010;
+  --font-headings: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* Global Styles */
+body {
+  background-color: var(--primary-bg);
+  color: var(--brand-black);
+  font-family: var(--font-body);
+  font-weight: 500; /* Medium 500 as requested */
+  overflow-x: hidden;
+  margin: 0;
+  padding-top: 92px; /* offset for fixed navbar */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  font-weight: 900 !important; /* Much thicker weight (Extra Bold/Black) */
+  color: var(--brand-black);
+}
+
+/* Common Components and Helper Classes */
+.btn-brand-yellow {
+  background-color: var(--brand-yellow);
+  color: var(--brand-black);
+  font-family: var(--font-headings);
+  font-weight: 700;
+  border: none;
+  transition: all 0.3s ease;
+  padding: 10px 24px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+  &:hover {
+    background-color: var(--brand-yellow-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* CSS-based Masonry Grid Layout */
+.masonry-container {
+  column-count: 4;
+  column-gap: 1.5rem;
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    column-count: 3;
+  }
+  @media (max-width: 768px) {
+    column-count: 2;
+  }
+  @media (max-width: 480px) {
+    column-count: 1;
+  }
+}
+
+.masonry-item {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  break-inside: avoid;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand-black);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-yellow);
+}
+
+/* Spacing fixes on mobile devices */
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  body {
+    padding-top: 86px; /* slightly smaller navbar offset on mobile */
+  }
+}

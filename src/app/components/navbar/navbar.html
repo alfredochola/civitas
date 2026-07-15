@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg fixed-top bg-white border-bottom border-light navbar-light py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/home" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">
+      <img src="assets/logo.png" alt="Civitas Logo" style="height: 52px; object-fit: contain;">
+    </a>
+    
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#civitasNavbar" aria-controls="civitasNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="civitasNavbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+        <li class="nav-item me-3">
+          <a class="nav-link px-2 font-headings" routerLink="/home" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Home</a>
+        </li>
+        <li class="nav-item me-3">
+          <a class="nav-link px-2 font-headings" routerLink="/lights" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Lights</a>
+        </li>
+        <li class="nav-item me-3">
+          <a class="nav-link px-2 font-headings" routerLink="/projects" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Projects</a>
+        </li>
+        
+        <!-- Services Dropdown -->
+        <li class="nav-item dropdown me-3">
+          <a class="nav-link dropdown-toggle px-2 font-headings" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg py-3 px-2" aria-labelledby="servicesDropdown" style="min-width: 320px; border-radius: 8px;">
+            <li>
+              <div class="dropdown-header text-uppercase fw-bold text-dark font-headings pb-2" style="font-size: 0.8rem; border-bottom: 2px solid var(--brand-yellow);">
+                <i class="bi bi-lightbulb-fill me-2 text-warning"></i>Option 1 - Lights
+              </div>
+              <p class="dropdown-item-text text-muted mb-2 mt-2" style="font-size: 0.85rem; white-space: normal;">
+                Maintenance, replacements, custom design lights, proposals, mood lighting, and expert consultations.
+              </p>
+            </li>
+            <li><hr class="dropdown-divider my-2"></li>
+            <li>
+              <div class="dropdown-header text-uppercase fw-bold text-dark font-headings pb-2" style="font-size: 0.8rem; border-bottom: 2px solid var(--brand-yellow);">
+                <i class="bi bi-house-gear-fill me-2 text-dark"></i>Option 2 - Construction
+              </div>
+              <p class="dropdown-item-text text-muted mb-0 mt-2" style="font-size: 0.85rem; white-space: normal;">
+                Interior/exterior designs (Architectural, Electrical, Plumbing, Mechanical), construction, project management, renovations, and consultation.
+              </p>
+            </li>
+            <li><hr class="dropdown-divider my-2"></li>
+            <li>
+              <a class="dropdown-item text-center fw-bold font-headings" routerLink="/services" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" style="font-size: 0.85rem; color: var(--brand-black);">
+                View Details <i class="bi bi-arrow-right-short"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link px-3 py-2 btn-brand-yellow text-dark font-headings rounded" routerLink="/contact" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

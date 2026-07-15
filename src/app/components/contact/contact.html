@@ -1,0 +1,120 @@
+<div class="container py-5">
+  <!-- Header -->
+  <div class="text-center mb-5">
+    <span class="text-uppercase tracking-widest fw-bold font-headings text-secondary small" style="letter-spacing: 2px;">Get in Touch</span>
+    <h1 class="display-5 fw-bold text-dark font-headings mt-2">CONTACT CIVITAS SOLUTIONS</h1>
+    <p class="text-muted mx-auto" style="max-width: 600px;">
+      Have a question about our lighting catalog, or need detailed engineering blueprints? Complete the form below or start a direct chat.
+    </p>
+  </div>
+
+  <div class="row g-5">
+    <!-- Left Column: Contact Cards -->
+    <div class="col-lg-5">
+      <h3 class="fw-bold font-headings text-dark mb-4">Contact Information</h3>
+      
+      <!-- Card: Location -->
+      <div class="d-flex align-items-start mb-4">
+        <div class="info-icon bg-light text-dark rounded d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+          <i class="bi bi-geo-alt-fill fs-5"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold font-headings text-dark mb-1">Our Office</h6>
+          <p class="text-muted small mb-0">Kampala, Uganda</p>
+        </div>
+      </div>
+
+      <!-- Card: Email -->
+      <div class="d-flex align-items-start mb-4">
+        <div class="info-icon bg-light text-dark rounded d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+          <i class="bi bi-envelope-fill fs-5"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold font-headings text-dark mb-1">Email Addresses</h6>
+          <p class="text-muted small mb-0">info&#64;civitas.co.ug</p>
+        </div>
+      </div>
+
+      <!-- Card: WhatsApp -->
+      <div class="d-flex align-items-start mb-4">
+        <div class="info-icon bg-light text-success rounded d-flex align-items-center justify-content-center me-3" style="width: 45px; height: 45px; flex-shrink: 0;">
+          <i class="bi bi-whatsapp fs-5"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold font-headings text-dark mb-1">Direct WhatsApp Link</h6>
+          <p class="text-muted small mb-0">+256 393 208549</p>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Direct WhatsApp Action Card -->
+      <div class="card border-0 bg-light p-4" style="border-radius: 8px; border-left: 4px solid var(--brand-yellow) !important;">
+        <h5 class="fw-bold font-headings text-dark mb-2">Need Immediate Answers?</h5>
+        <p class="text-muted small mb-4">Chat directly with a Civitas technical consultant on WhatsApp now.</p>
+        <button (click)="directWhatsAppChat()" class="btn btn-brand-yellow font-headings fw-bold d-flex align-items-center justify-content-center">
+          <i class="bi bi-whatsapp me-2 fs-5"></i> Start WhatsApp Chat
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Contact Form -->
+    <div class="col-lg-7">
+      <div class="card border-light shadow-sm p-4" style="border-radius: 8px;">
+        <h3 class="fw-bold font-headings text-dark mb-4" style="font-size: 1.25rem;">Submit an Inquiry</h3>
+        
+        <form #contactForm="ngForm" (ngSubmit)="onSubmitForm(contactForm)">
+          <!-- Name -->
+          <div class="mb-3">
+            <label for="name" class="form-label small fw-bold font-headings text-dark">Full Name *</label>
+            <input type="text" class="form-control bg-light border-light" id="name" name="name" [(ngModel)]="name" required #nameInput="ngModel" [class.is-invalid]="nameInput.invalid && nameInput.touched">
+            <div class="invalid-feedback">Full name is required.</div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label small fw-bold font-headings text-dark">Email Address *</label>
+            <input type="email" class="form-control bg-light border-light" id="email" name="email" [(ngModel)]="email" required email #emailInput="ngModel" [class.is-invalid]="emailInput.invalid && emailInput.touched">
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+
+          <!-- Phone -->
+          <div class="mb-3">
+            <label for="phone" class="form-label small fw-bold font-headings text-dark">Phone Number (Optional)</label>
+            <input type="text" class="form-control bg-light border-light" id="phone" name="phone" [(ngModel)]="phone">
+          </div>
+
+          <!-- Service Dropdown -->
+          <div class="mb-3">
+            <label for="serviceOption" class="form-label small fw-bold font-headings text-dark">Preferred Portfolio Service</label>
+            <select class="form-select bg-light border-light" id="serviceOption" name="serviceOption" [(ngModel)]="serviceOption">
+              <option value="Lighting Solutions">Option 1 - Lighting Solutions</option>
+              <option value="Construction & Architecture">Option 2 - Construction & Architecture</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div class="mb-4">
+            <label for="message" class="form-label small fw-bold font-headings text-dark">Message *</label>
+            <textarea class="form-control bg-light border-light" id="message" name="message" rows="4" [(ngModel)]="message" required #messageInput="ngModel" [class.is-invalid]="messageInput.invalid && messageInput.touched"></textarea>
+            <div class="invalid-feedback">Message detail is required.</div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="d-flex flex-wrap gap-2 justify-content-end">
+            <!-- Submit Form Button -->
+            <button type="submit" class="btn btn-dark font-headings text-uppercase fw-bold px-4" [disabled]="contactForm.invalid || isSubmitted">
+              <span *ngIf="isSubmitted" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              {{ isSubmitted ? 'Submitting...' : 'Submit Form' }}
+            </button>
+            
+            <!-- Send to WhatsApp instead Button -->
+            <a [href]="getWhatsAppUrl()" target="_blank" class="btn btn-brand-yellow font-headings text-uppercase fw-bold px-4 d-inline-flex align-items-center" [class.disabled]="contactForm.invalid">
+              <i class="bi bi-whatsapp me-2"></i> Send via WhatsApp
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

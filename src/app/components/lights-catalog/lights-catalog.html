@@ -1,0 +1,74 @@
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <span class="text-uppercase tracking-widest fw-bold font-headings text-secondary small" style="letter-spacing: 2px;">Bespoke lighting</span>
+    <h1 class="display-5 fw-bold text-dark font-headings mt-2">HIGH-END LIGHTING CATALOG</h1>
+    <p class="text-muted mx-auto" style="max-width: 600px;">
+      Explore our collections of handwoven rattan fixtures, solar wall lights, beacons, and traditional brass sconces designed for high-definition exteriors and interiors.
+    </p>
+  </div>
+
+  <!-- Filters & Search Section -->
+  <div class="row g-3 mb-5 align-items-center">
+    <!-- Categories List -->
+    <div class="col-lg-8 order-2 order-lg-1">
+      <div class="d-flex flex-wrap gap-2">
+        <button *ngFor="let cat of categories" class="btn btn-sm btn-category" [class.active]="selectedCategory === cat.value" (click)="setCategory(cat.value)">
+          {{ cat.name }}
+        </button>
+      </div>
+    </div>
+    
+    <!-- Search Bar -->
+    <div class="col-lg-4 order-1 order-lg-2">
+      <div class="input-group">
+        <span class="input-group-text border-end-0 bg-light text-muted"><i class="bi bi-search"></i></span>
+        <input type="text" class="form-control bg-light border-start-0 border-light" placeholder="Search catalog..." [(ngModel)]="searchQuery" (input)="applyFilters()">
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <app-spinner [isLoading]="isLoading" message="Fetching lighting catalog fixtures..."></app-spinner>
+
+  <div *ngIf="!isLoading">
+    <!-- Products Grid -->
+    <div class="row g-4" *ngIf="filteredLights.length > 0">
+      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let item of filteredLights">
+        <div class="card h-100 product-card border-light shadow-sm">
+          <!-- Product Image -->
+          <div class="product-img-wrapper overflow-hidden bg-light position-relative" [routerLink]="['/lights', item.id]">
+            <img [src]="item.images && item.images.length > 0 ? item.images[0] : 'assets/logo.png'" [alt]="item.productName" class="card-img-top product-image">
+            <div class="product-img-overlay d-flex align-items-center justify-content-center">
+              <span class="btn btn-sm btn-brand-yellow font-headings fw-bold">View Specs</span>
+            </div>
+          </div>
+          
+          <!-- Card Body -->
+          <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title fw-bold font-headings mb-2 text-dark text-truncate" style="font-size: 1rem;" [title]="item.productName">
+              {{ item.productName }}
+            </h5>
+            
+            <p class="card-text text-muted small flex-grow-1 mb-3" style="line-height: 1.5;">
+              {{ item.description ? (item.description | slice:0:80) + '...' : 'Premium quality lighting fixture from Civitas, designed for elegance and durability...' }}
+            </p>
+            
+            <div class="d-flex align-items-center justify-content-between pt-2 border-top border-light mt-auto">
+              <span class="small text-secondary fw-bold"><i class="bi bi-tag-fill me-1"></i>Bespoke</span>
+              <a [routerLink]="['/lights', item.id]" class="text-decoration-none fw-bold font-headings text-dark hover-yellow" style="font-size: 0.85rem;">
+                Details <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="text-center py-5" *ngIf="filteredLights.length === 0">
+      <i class="bi bi-lightbulb-off text-muted display-4 mb-3"></i>
+      <h4 class="fw-bold font-headings">No Products Found</h4>
+      <p class="text-secondary small">We couldn't find matches for "{{ searchQuery }}". Try checking spelling or change categories.</p>
+    </div>
+  </div>
+</div>
