@@ -34,4 +34,4 @@ jobs:
           protocol: ftp
           local-dir: dist/civitas/browser/
           server-dir: public_html/
-          dangerous-clean-slate: true
+          dangerous-clean-slate: false
