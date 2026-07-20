@@ -116,3 +116,57 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 86px; /* slightly smaller navbar offset on mobile */
   }
 }
+
+/* Social Icon Buttons */
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--brand-black);
+  color: #ffffff;
+  font-size: 1.15rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    background-color: var(--brand-yellow);
+    color: var(--brand-black);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(252, 197, 23, 0.3);
+  }
+}
+
+.btn-social-footer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background-color: var(--brand-yellow);
+    color: var(--brand-black);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(252, 197, 23, 0.4);
+    border-color: var(--brand-yellow);
+  }
+}
+
+@media (min-width: 768px) {
+  .border-md-end {
+    border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
