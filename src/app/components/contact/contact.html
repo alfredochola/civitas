@@ -63,6 +63,55 @@
       <div class="card border-light shadow-sm p-4" style="border-radius: 8px;">
         <h3 class="fw-bold font-headings text-dark mb-4" style="font-size: 1.25rem;">Submit an Inquiry</h3>
         
+        <!-- Sending Progress Indicator Banner -->
+        <div *ngIf="submissionState === 'sending'" class="sending-progress-card mb-4">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <span class="small font-headings text-uppercase tracking-wider text-warning fw-bold d-flex align-items-center">
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Sending Contact Inquiry...
+            </span>
+            <span class="badge bg-warning text-dark font-monospace fw-bold">{{ progressPercent }}%</span>
+          </div>
+          
+          <div class="progress-track mb-2">
+            <div class="progress-bar-fill" [style.width.%]="progressPercent"></div>
+          </div>
+          
+          <p class="small mb-0 text-white-50 fst-italic">
+            {{ progressStepText }}
+          </p>
+        </div>
+
+        <!-- Success Banner -->
+        <div *ngIf="submissionState === 'success'" class="success-card mb-4">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-check-circle-fill fs-4 me-3 text-success"></i>
+            <div class="flex-grow-1">
+              <h6 class="fw-bold mb-1">Inquiry Sent Successfully!</h6>
+              <p class="small mb-2">
+                Your message has been sent to <strong>{{ recipientEmail }}</strong>. Our team will review it and reply as soon as possible.
+              </p>
+              <button type="button" class="btn btn-sm btn-outline-success font-headings" (click)="resetStatus()">
+                Send Another Message
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Banner -->
+        <div *ngIf="submissionState === 'error'" class="error-card mb-4">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-exclamation-triangle-fill fs-4 me-3 text-danger"></i>
+            <div class="flex-grow-1">
+              <h6 class="fw-bold mb-1">Email Dispatch Status</h6>
+              <p class="small mb-2">{{ errorMessage }}</p>
+              <button type="button" class="btn btn-sm btn-outline-danger font-headings" (click)="resetStatus()">
+                Dismiss & Try Again
+              </button>
+            </div>
+          </div>
+        </div>
+
         <form #contactForm="ngForm" (ngSubmit)="onSubmitForm(contactForm)">
           <!-- Name -->
           <div class="mb-3">
@@ -103,9 +152,10 @@
           <!-- Action Buttons -->
           <div class="d-flex flex-wrap gap-2 justify-content-end">
             <!-- Submit Form Button -->
-            <button type="submit" class="btn btn-dark font-headings text-uppercase fw-bold px-4" [disabled]="contactForm.invalid || isSubmitted">
-              <span *ngIf="isSubmitted" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-              {{ isSubmitted ? 'Submitting...' : 'Submit Form' }}
+            <button type="submit" class="btn btn-dark font-headings text-uppercase fw-bold px-4 d-inline-flex align-items-center" [disabled]="contactForm.invalid || isSubmitting">
+              <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              <i *ngIf="!isSubmitting" class="bi bi-send-fill me-2"></i>
+              {{ isSubmitting ? 'Sending...' : 'Submit Form' }}
             </button>
             
             <!-- Send to WhatsApp instead Button -->
