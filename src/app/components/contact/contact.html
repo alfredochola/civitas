@@ -149,10 +149,51 @@
             <div class="invalid-feedback">Message detail is required.</div>
           </div>
 
+          <!-- Anti-Spam Security Check (Are you human?) -->
+          <div class="card bg-light border-light p-3 mb-4 rounded-3 shadow-xs">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <label for="captchaAnswer" class="form-label small fw-bold font-headings text-dark mb-0 d-flex align-items-center">
+                <i class="bi bi-shield-check text-warning me-2 fs-6"></i> Security Check: Are you human? *
+              </label>
+              <button type="button" class="btn btn-sm text-muted p-0 hover-yellow border-0 bg-transparent" (click)="generateCaptcha()" title="Refresh Security Question">
+                <i class="bi bi-arrow-clockwise fs-6 me-1"></i> New question
+              </button>
+            </div>
+            
+            <div class="row align-items-center g-2">
+              <div class="col-auto">
+                <span class="badge bg-dark font-monospace fs-6 px-3 py-2 text-warning rounded-2">
+                  {{ captchaNum1 }} + {{ captchaNum2 }} = ?
+                </span>
+              </div>
+              <div class="col">
+                <input 
+                  type="number" 
+                  class="form-control bg-white" 
+                  id="captchaAnswer" 
+                  name="userCaptchaInput" 
+                  [(ngModel)]="userCaptchaInput" 
+                  placeholder="Enter total sum" 
+                  required 
+                  #captchaInput="ngModel"
+                  [class.is-invalid]="(captchaInput.touched && isCaptchaInvalid()) || captchaError"
+                >
+              </div>
+            </div>
+            <div *ngIf="captchaError" class="text-danger small mt-2">
+              <i class="bi bi-exclamation-circle me-1"></i> {{ captchaError }}
+            </div>
+          </div>
+
+          <!-- Invisible Honeypot Trap for Spambots -->
+          <div style="display: none !important; opacity: 0; position: absolute; left: -9999px;" aria-hidden="true">
+            <input type="text" name="website_url" [(ngModel)]="honeypotTrap" tabindex="-1" autocomplete="off">
+          </div>
+
           <!-- Action Buttons -->
           <div class="d-flex flex-wrap gap-2 justify-content-end">
             <!-- Submit Form Button -->
-            <button type="submit" class="btn btn-dark font-headings text-uppercase fw-bold px-4 d-inline-flex align-items-center" [disabled]="contactForm.invalid || isSubmitting">
+            <button type="submit" class="btn btn-dark font-headings text-uppercase fw-bold px-4 d-inline-flex align-items-center" [disabled]="contactForm.invalid || isCaptchaInvalid() || isSubmitting">
               <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
               <i *ngIf="!isSubmitting" class="bi bi-send-fill me-2"></i>
               {{ isSubmitting ? 'Sending...' : 'Submit Form' }}

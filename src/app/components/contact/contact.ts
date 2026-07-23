@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import emailjs from '@emailjs/browser';
@@ -10,12 +10,19 @@ import { environment } from '../../../environments/environment';
   templateUrl: './contact.html',
   styleUrl: './contact.scss'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
   name = '';
   email = '';
   phone = '';
   serviceOption = 'Lighting Solutions';
   message = '';
+
+  // Anti-Spam Human Verification Controls
+  captchaNum1 = 0;
+  captchaNum2 = 0;
+  userCaptchaInput: number | string = '';
+  honeypotTrap = '';
+  captchaError = '';
 
   // Progress & submission state
   isSubmitting = false;
@@ -24,6 +31,24 @@ export class ContactComponent {
   progressStepText = '';
   errorMessage = '';
   recipientEmail = environment.recipientEmail;
+
+  ngOnInit(): void {
+    this.generateCaptcha();
+  }
+
+  generateCaptcha(): void {
+    this.captchaNum1 = Math.floor(Math.random() * 9) + 1;
+    this.captchaNum2 = Math.floor(Math.random() * 9) + 1;
+    this.userCaptchaInput = '';
+    this.captchaError = '';
+  }
+
+  isCaptchaInvalid(): boolean {
+    if (this.userCaptchaInput === '' || this.userCaptchaInput === null || this.userCaptchaInput === undefined) {
+      return true;
+    }
+    return Number(this.userCaptchaInput) !== (this.captchaNum1 + this.captchaNum2);
+  }
 
   getWhatsAppUrl(): string {
     const contactPhone = environment.whatsappContact.replace('+', '');
@@ -34,6 +59,18 @@ export class ContactComponent {
   }
 
   async onSubmitForm(form: NgForm): Promise<void> {
+    // 1. Silent Honeypot Trap Check for Automated Bots
+    if (this.honeypotTrap) {
+      console.warn('Spambot detected via honeypot trap. Submission blocked.');
+      return;
+    }
+
+    // 2. Human Verification Math Check
+    if (this.isCaptchaInvalid()) {
+      this.captchaError = `Incorrect answer. Please solve: ${this.captchaNum1} + ${this.captchaNum2} = ?`;
+      return;
+    }
+
     if (!form || form.invalid || this.isSubmitting) {
       return;
     }
@@ -43,6 +80,7 @@ export class ContactComponent {
     this.progressPercent = 15;
     this.progressStepText = 'Validating input and initializing secure connection...';
     this.errorMessage = '';
+    this.captchaError = '';
 
     const formattedTime = new Date().toLocaleString('en-US', {
       dateStyle: 'full',
@@ -103,11 +141,12 @@ export class ContactComponent {
       this.submissionState = 'success';
       this.isSubmitting = false;
 
-      // Reset form fields
+      // Reset form fields and generate new captcha
       setTimeout(() => {
         form.resetForm({
           serviceOption: 'Lighting Solutions'
         });
+        this.generateCaptcha();
       }, 800);
 
     } catch (error: any) {
@@ -124,6 +163,7 @@ export class ContactComponent {
     this.progressPercent = 0;
     this.progressStepText = '';
     this.errorMessage = '';
+    this.generateCaptcha();
   }
 
   directWhatsAppChat(): void {
@@ -131,4 +171,5 @@ export class ContactComponent {
     window.open(`https://wa.me/${contactPhone}?text=Hello%20Civitas%2C%20I%20would%20like%20to%20consult%20regarding%20your%20services.`, '_blank');
   }
 }
+
 
