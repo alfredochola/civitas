@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Optimize any new project images
+        run: npm run optimize-images
+
       - name: Build Angular app
         run: npx ng build --configuration production
 

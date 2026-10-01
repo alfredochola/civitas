@@ -37,14 +37,15 @@
     </div>
 
     <!-- Masonry Grid -->
-    <div class="masonry-container" *ngIf="filteredImages.length > 0">
-      <div class="masonry-item position-relative shadow-sm rounded overflow-hidden" *ngFor="let img of filteredImages; let i = index">
+    <div class="masonry-container" *ngIf="displayedImages.length > 0">
+      <div class="masonry-item position-relative shadow-sm rounded overflow-hidden" *ngFor="let img of displayedImages; let i = index">
         <div class="masonry-img-wrapper" (click)="openLightbox(i)">
           
-          <!-- Individual Image Loader Spinner -->
-          <div *ngIf="!imageLoadedMap[img.url]" class="image-loader-container d-flex align-items-center justify-content-center bg-light w-100 position-absolute top-0 start-0 h-100" style="z-index: 1;">
-            <div class="spinner-border spinner-border-sm text-warning" role="status">
-              <span class="visually-hidden">Loading...</span>
+          <!-- Soft Skeleton Shimmer Placeholder -->
+          <div *ngIf="!imageLoadedMap[img.url]" class="skeleton-placeholder position-absolute top-0 start-0 w-100 h-100">
+            <div class="skeleton-shimmer"></div>
+            <div class="skeleton-hint d-flex align-items-center justify-content-center h-100">
+              <i class="bi bi-image text-muted opacity-50 fs-4"></i>
             </div>
           </div>
 
@@ -53,7 +54,8 @@
                class="img-fluid w-100 masonry-image" 
                [class.loaded]="imageLoadedMap[img.url]"
                (load)="onImageLoad(img.url)"
-               loading="lazy">
+               loading="lazy"
+               decoding="async">
           
           <!-- Hover Overlay Details -->
           <div class="masonry-overlay d-flex flex-column justify-content-end p-3 text-white" *ngIf="imageLoadedMap[img.url]">
@@ -68,6 +70,14 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Scroll Sentinel & Incremental Load More -->
+    <div #scrollSentinel class="scroll-sentinel py-4 text-center" *ngIf="hasMoreImages">
+      <button class="btn btn-outline-dark btn-sm rounded-pill px-4 py-2 font-headings fw-bold shadow-sm" (click)="loadMore()">
+        <span class="spinner-border spinner-border-sm me-2 text-warning" role="status" aria-hidden="true"></span>
+        Load More Photos ({{ displayedImages.length }} of {{ filteredImages.length }})
+      </button>
     </div>
 
     <!-- Empty State -->

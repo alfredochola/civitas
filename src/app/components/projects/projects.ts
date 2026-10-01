@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService, Project } from '../../services/data.service';
 import { SpinnerComponent } from '../spinner/spinner';
@@ -18,14 +18,22 @@ interface ImageItem {
   templateUrl: './projects.html',
   styleUrl: './projects.scss'
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('scrollSentinel') scrollSentinel?: ElementRef<HTMLDivElement>;
+
   projects: Project[] = [];
   filteredImages: ImageItem[] = [];
+  displayedImages: ImageItem[] = [];
   allImages: ImageItem[] = [];
   
   isLoading = true;
   selectedStatus = 'all';
   selectedProject = 'all';
+
+  // Incremental Batch Loading
+  pageSize = 12;
+  displayedCount = 16;
+  private observer?: IntersectionObserver;
   
   // Image load state tracking
   imageLoadedMap: { [url: string]: boolean } = {};
@@ -54,6 +62,52 @@ export class ProjectsComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.setupObserver();
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
+  private setupObserver(): void {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    this.observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.loadMore();
+      }
+    }, { rootMargin: '300px' });
+
+    if (this.scrollSentinel?.nativeElement) {
+      this.observer.observe(this.scrollSentinel.nativeElement);
+    }
+  }
+
+  private updateSentinelObservation(): void {
+    setTimeout(() => {
+      if (this.observer && this.scrollSentinel?.nativeElement) {
+        this.observer.disconnect();
+        if (this.hasMoreImages) {
+          this.observer.observe(this.scrollSentinel.nativeElement);
+        }
+      }
+    }, 50);
+  }
+
+  get hasMoreImages(): boolean {
+    return this.displayedImages.length < this.filteredImages.length;
+  }
+
+  loadMore(): void {
+    if (!this.hasMoreImages) return;
+    this.displayedCount += this.pageSize;
+    this.displayedImages = this.filteredImages.slice(0, this.displayedCount);
+    this.updateSentinelObservation();
   }
 
   private flattenImages(): void {
@@ -104,10 +158,13 @@ export class ProjectsComponent implements OnInit {
     }
 
     this.filteredImages = result;
+    this.displayedCount = 16;
+    this.displayedImages = this.filteredImages.slice(0, this.displayedCount);
+    this.updateSentinelObservation();
   }
 
   openLightbox(index: number): void {
-    const clickedImage = this.filteredImages[index];
+    const clickedImage = this.displayedImages[index];
     if (!clickedImage) return;
 
     // Isolate only the images belonging to this specific project
