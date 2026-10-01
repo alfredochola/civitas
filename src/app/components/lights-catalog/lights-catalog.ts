@@ -16,9 +16,17 @@ export class LightsCatalogComponent implements OnInit {
   filteredLights: Light[] = [];
   isLoading = true;
 
-  // Search & Filter state
   searchQuery = '';
   selectedCategory = 'all';
+
+  // Image load state tracking
+  imageLoadedMap: { [url: string]: boolean } = {};
+
+  onImageLoad(url: string): void {
+    if (url) {
+      this.imageLoadedMap[url] = true;
+    }
+  }
 
   categories = [
     { name: 'All', value: 'all' },

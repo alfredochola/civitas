@@ -15,7 +15,7 @@
     "ipRating": "IP44",
     "installation": "No hardwiring required",
     "functionalFeatures": "3 Mode Motion Sensor",
-    "images": ["assets/images/lights/black Nile beacon.jpg"]
+    "images": ["assets/images/lights/black Nile beacon.webp"]
   },
   {
     "id": "lt-002",
@@ -33,7 +33,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Weather Resistant",
-    "images": ["assets/images/lights/bougie rope lantern.jpg"]
+    "images": ["assets/images/lights/bougie rope lantern.webp"]
   },
   {
     "id": "lt-003",
@@ -51,7 +51,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Classic Design",
-    "images": ["assets/images/lights/Cheshire lantern.jpg"]
+    "images": ["assets/images/lights/Cheshire lantern.webp"]
   },
   {
     "id": "lt-004",
@@ -69,7 +69,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Organic Texture",
-    "images": ["assets/images/lights/chwezi rattan.jpg"]
+    "images": ["assets/images/lights/chwezi rattan.webp"]
   },
   {
     "id": "lt-005",
@@ -87,7 +87,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Rustic Finish",
-    "images": ["assets/images/lights/Cornwall lantern.jpg"]
+    "images": ["assets/images/lights/Cornwall lantern.webp"]
   },
   {
     "id": "lt-006",
@@ -105,7 +105,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Multi-bulb support",
-    "images": ["assets/images/lights/Cumbria candelabrum.jpg"]
+    "images": ["assets/images/lights/Cumbria candelabrum.webp"]
   },
   {
     "id": "lt-007",
@@ -124,9 +124,9 @@
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Directional Lighting",
     "images": [
-      "assets/images/lights/Dogonian sconce (1).jpg",
-      "assets/images/lights/Dogonian sconce (2).jpg",
-      "assets/images/lights/Dogonian sconce (3).jpg"
+      "assets/images/lights/Dogonian sconce (1).webp",
+      "assets/images/lights/Dogonian sconce (2).webp",
+      "assets/images/lights/Dogonian sconce (3).webp"
     ]
   },
   {
@@ -145,7 +145,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Handwoven Shade",
-    "images": ["assets/images/lights/Elbrus rope rattan.jpg"]
+    "images": ["assets/images/lights/Elbrus rope rattan.webp"]
   },
   {
     "id": "lt-009",
@@ -163,7 +163,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Elegant Frame",
-    "images": ["assets/images/lights/Hampshire lantern.jpg"]
+    "images": ["assets/images/lights/Hampshire lantern.webp"]
   },
   {
     "id": "lt-010",
@@ -182,8 +182,8 @@
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Exotic Aesthetic",
     "images": [
-      "assets/images/lights/la luce rattan (1).jpg",
-      "assets/images/lights/la luce rattan (2).jpg"
+      "assets/images/lights/la luce rattan (1).webp",
+      "assets/images/lights/la luce rattan (2).webp"
     ]
   },
   {
@@ -202,7 +202,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Eco-friendly materials",
-    "images": ["assets/images/lights/le bois rattan.jpg"]
+    "images": ["assets/images/lights/le bois rattan.webp"]
   },
   {
     "id": "lt-012",
@@ -220,7 +220,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Luxury Accent",
-    "images": ["assets/images/lights/Luxor lantern.jpg"]
+    "images": ["assets/images/lights/Luxor lantern.webp"]
   },
   {
     "id": "lt-013",
@@ -238,7 +238,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Rustic Handcrafted Shade",
-    "images": ["assets/images/lights/Miombo rattan.jpg"]
+    "images": ["assets/images/lights/Miombo rattan.webp"]
   },
   {
     "id": "lt-014",
@@ -256,7 +256,7 @@
     "ipRating": "IP44",
     "installation": "Ground mounting or hardwiring required",
     "functionalFeatures": "Robust Outdoor Beacon",
-    "images": ["assets/images/lights/Mopane beacon.jpg"]
+    "images": ["assets/images/lights/Mopane beacon.webp"]
   },
   {
     "id": "lt-015",
@@ -274,7 +274,7 @@
     "ipRating": "IP54",
     "installation": "Anchor bolts included",
     "functionalFeatures": "Desert-proof sealing",
-    "images": ["assets/images/lights/Namibian beacon.jpg"]
+    "images": ["assets/images/lights/Namibian beacon.webp"]
   },
   {
     "id": "lt-016",
@@ -292,7 +292,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Intricate Light Shadows",
-    "images": ["assets/images/lights/Nima rattan.jpg"]
+    "images": ["assets/images/lights/Nima rattan.webp"]
   },
   {
     "id": "lt-017",
@@ -310,7 +310,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Antiquated Aesthetics",
-    "images": ["assets/images/lights/Nordic vintage beacon.jpg"]
+    "images": ["assets/images/lights/Nordic vintage beacon.webp"]
   },
   {
     "id": "lt-018",
@@ -329,8 +329,8 @@
     "installation": "Wall mount bracket included",
     "functionalFeatures": "Reflected Warm Ambient Light",
     "images": [
-      "assets/images/lights/Nyamwezi sconce (1).jpg",
-      "assets/images/lights/Nyamwezi sconce (2).jpg"
+      "assets/images/lights/Nyamwezi sconce (1).webp",
+      "assets/images/lights/Nyamwezi sconce (2).webp"
     ]
   },
   {
@@ -349,7 +349,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Traditional Weaving Pattern",
-    "images": ["assets/images/lights/Persian rattan cane.jpg"]
+    "images": ["assets/images/lights/Persian rattan cane.webp"]
   },
   {
     "id": "lt-020",
@@ -367,7 +367,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Varnished Wood Finish",
-    "images": ["assets/images/lights/Rhodesian teak.jpg"]
+    "images": ["assets/images/lights/Rhodesian teak.webp"]
   },
   {
     "id": "lt-021",
@@ -385,7 +385,7 @@
     "ipRating": "IP20",
     "installation": "Ceiling chain included",
     "functionalFeatures": "Gothic candelabra structure",
-    "images": ["assets/images/lights/Rumuri Candelabrum.jpg"]
+    "images": ["assets/images/lights/Rumuri Candelabrum.webp"]
   },
   {
     "id": "lt-022",
@@ -403,7 +403,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Torch-style Glow",
-    "images": ["assets/images/lights/rumuri sconce.jpg"]
+    "images": ["assets/images/lights/rumuri sconce.webp"]
   },
   {
     "id": "lt-023",
@@ -421,7 +421,7 @@
     "ipRating": "IP44",
     "installation": "Hardwiring required",
     "functionalFeatures": "Minimalist Scandinavian design",
-    "images": ["assets/images/lights/Scandinavian beacon.jpg"]
+    "images": ["assets/images/lights/Scandinavian beacon.webp"]
   },
   {
     "id": "lt-024",
@@ -439,7 +439,7 @@
     "ipRating": "IP44",
     "installation": "Carry handle/top loop included",
     "functionalFeatures": "Soft Diffused Ambient Light",
-    "images": ["assets/images/lights/serengeti lantern.jpg"]
+    "images": ["assets/images/lights/serengeti lantern.webp"]
   },
   {
     "id": "lt-025",
@@ -458,8 +458,8 @@
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Geometric Slavic Lines",
     "images": [
-      "assets/images/lights/Slavic plain (1).jpg",
-      "assets/images/lights/Slavic plain (2).jpg"
+      "assets/images/lights/Slavic plain (1).webp",
+      "assets/images/lights/Slavic plain (2).webp"
     ]
   },
   {
@@ -479,9 +479,9 @@
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Desert-inspired pattern",
     "images": [
-      "assets/images/lights/Sonoran rattan.jpg",
-      "assets/images/lights/Sonoran rattan (1).jpg",
-      "assets/images/lights/Sonoran rattan (2).jpg"
+      "assets/images/lights/Sonoran rattan.webp",
+      "assets/images/lights/Sonoran rattan (1).webp",
+      "assets/images/lights/Sonoran rattan (2).webp"
     ]
   },
   {
@@ -500,7 +500,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Sudanese Grassland Weave",
-    "images": ["assets/images/lights/Sudanian Savanna.jpg"]
+    "images": ["assets/images/lights/Sudanian Savanna.webp"]
   },
   {
     "id": "lt-028",
@@ -518,7 +518,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Marine Coastal Finish",
-    "images": ["assets/images/lights/Swahili rattan.jpg"]
+    "images": ["assets/images/lights/Swahili rattan.webp"]
   },
   {
     "id": "lt-029",
@@ -537,12 +537,12 @@
     "installation": "Pendant suspension system",
     "functionalFeatures": "Overlapping Glass Panels",
     "images": [
-      "assets/images/lights/Trilobite lantern (1).jpg",
-      "assets/images/lights/Trilobite lantern (2).jpg",
-      "assets/images/lights/Trilobite lantern (3).jpg",
-      "assets/images/lights/Trilobite lantern (4).jpg",
-      "assets/images/lights/Trilobite lantern (5).jpg",
-      "assets/images/lights/Trilobite lantern (6).jpg"
+      "assets/images/lights/Trilobite lantern (1).webp",
+      "assets/images/lights/Trilobite lantern (2).webp",
+      "assets/images/lights/Trilobite lantern (3).webp",
+      "assets/images/lights/Trilobite lantern (4).webp",
+      "assets/images/lights/Trilobite lantern (5).webp",
+      "assets/images/lights/Trilobite lantern (6).webp"
     ]
   },
   {
@@ -561,7 +561,7 @@
     "ipRating": "IP44",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Compact Light-weight Shell",
-    "images": ["assets/images/lights/trilobite lite.jpg"]
+    "images": ["assets/images/lights/trilobite lite.webp"]
   },
   {
     "id": "lt-031",
@@ -579,7 +579,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Filigree Pattern Shadows",
-    "images": ["assets/images/lights/Varanasian sconce.jpg"]
+    "images": ["assets/images/lights/Varanasian sconce.webp"]
   },
   {
     "id": "lt-032",
@@ -597,7 +597,7 @@
     "ipRating": "IP44",
     "installation": "Wall mount standard",
     "functionalFeatures": "Woodland Foliage Engravings",
-    "images": ["assets/images/lights/Victorian woodland.jpg"]
+    "images": ["assets/images/lights/Victorian woodland.webp"]
   },
   {
     "id": "lt-033",
@@ -615,7 +615,7 @@
     "ipRating": "IP20",
     "installation": "Suspended ceiling cord",
     "functionalFeatures": "Robust Deep Basket Weave",
-    "images": ["assets/images/lights/Virunga basket rattan.jpg"]
+    "images": ["assets/images/lights/Virunga basket rattan.webp"]
   },
   {
     "id": "lt-034",
@@ -634,8 +634,8 @@
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Wide Flaired Rattan Umbrella",
     "images": [
-      "assets/images/lights/Zambezian rattan (1).jpg",
-      "assets/images/lights/Zambezian rattan (2).jpg"
+      "assets/images/lights/Zambezian rattan (1).webp",
+      "assets/images/lights/Zambezian rattan (2).webp"
     ]
   },
   {
@@ -654,7 +654,7 @@
     "ipRating": "IP20",
     "installation": "Mounting to ceiling and floor tracks",
     "functionalFeatures": "Integrated Architectural Backlight",
-    "images": ["assets/images/lights/room separator patterns.jpg"]
+    "images": ["assets/images/lights/room separator patterns.webp"]
   },
   {
     "id": "lt-036",
@@ -672,7 +672,7 @@
     "ipRating": "IP20",
     "installation": "Standard hardwiring required",
     "functionalFeatures": "Floral Stem Curvatures",
-    "images": ["assets/images/lights/rosemary.jpg"]
+    "images": ["assets/images/lights/rosemary.webp"]
   },
   {
     "id": "lt-037",
@@ -690,6 +690,6 @@
     "ipRating": "IP20",
     "installation": "Freestanding",
     "functionalFeatures": "Integrated Under-seat Accent Light",
-    "images": ["assets/images/lights/sander traa chair.jpg"]
+    "images": ["assets/images/lights/sander traa chair.webp"]
   }
 ]

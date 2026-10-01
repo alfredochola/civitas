@@ -37,7 +37,18 @@
         <div class="card h-100 product-card border-light shadow-sm">
           <!-- Product Image -->
           <div class="product-img-wrapper overflow-hidden bg-light position-relative" [routerLink]="['/lights', item.id]">
-            <img [src]="item.images && item.images.length > 0 ? item.images[0] : 'assets/logo.png'" [alt]="item.productName" class="card-img-top product-image">
+            <!-- Soft Skeleton Shimmer Placeholder -->
+            <div *ngIf="!imageLoadedMap[item.images && item.images.length > 0 ? item.images[0] : '']" class="skeleton-placeholder">
+              <div class="skeleton-shimmer"></div>
+            </div>
+
+            <img [src]="item.images && item.images.length > 0 ? item.images[0] : 'assets/logo.png'" 
+                 [alt]="item.productName" 
+                 class="card-img-top product-image"
+                 [class.loaded]="imageLoadedMap[item.images && item.images.length > 0 ? item.images[0] : '']"
+                 (load)="onImageLoad(item.images && item.images.length > 0 ? item.images[0] : '')"
+                 loading="lazy"
+                 decoding="async">
             <div class="product-img-overlay d-flex align-items-center justify-content-center">
               <span class="btn btn-sm btn-brand-yellow font-headings fw-bold">View Specs</span>
             </div>

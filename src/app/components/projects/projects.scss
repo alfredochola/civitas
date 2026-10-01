@@ -31,18 +31,16 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  background-color: #f1f3f5;
-  min-height: 220px;
+  display: block;
+  background-color: transparent;
 }
 
-/* Soft Skeleton Shimmer Placeholder */
+/* Soft Skeleton Shimmer Placeholder (displays during initial image load only) */
 .skeleton-placeholder {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 220px;
+  aspect-ratio: 16 / 10;
+  min-height: 180px;
   background-color: #e9ecef;
   overflow: hidden;
   z-index: 1;

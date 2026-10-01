@@ -41,8 +41,8 @@
       <div class="masonry-item position-relative shadow-sm rounded overflow-hidden" *ngFor="let img of displayedImages; let i = index">
         <div class="masonry-img-wrapper" (click)="openLightbox(i)">
           
-          <!-- Soft Skeleton Shimmer Placeholder -->
-          <div *ngIf="!imageLoadedMap[img.url]" class="skeleton-placeholder position-absolute top-0 start-0 w-100 h-100">
+          <!-- Soft Skeleton Shimmer Placeholder (Shows only while loading) -->
+          <div *ngIf="!imageLoadedMap[img.url]" class="skeleton-placeholder w-100">
             <div class="skeleton-shimmer"></div>
             <div class="skeleton-hint d-flex align-items-center justify-content-center h-100">
               <i class="bi bi-image text-muted opacity-50 fs-4"></i>

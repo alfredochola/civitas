@@ -37,4 +37,3 @@ jobs:
           protocol: ftp
           local-dir: dist/civitas/browser/
           server-dir: /
-          dangerous-clean-slate: true
