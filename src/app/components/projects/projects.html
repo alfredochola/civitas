@@ -42,23 +42,24 @@
         <div class="masonry-img-wrapper" (click)="openLightbox(i)">
           
           <!-- Soft Skeleton Shimmer Placeholder (Shows only while loading) -->
-          <div *ngIf="!imageLoadedMap[img.url]" class="skeleton-placeholder w-100">
+          <div *ngIf="!imageLoadedMap[img.thumbUrl || img.url]" class="skeleton-placeholder w-100">
             <div class="skeleton-shimmer"></div>
             <div class="skeleton-hint d-flex align-items-center justify-content-center h-100">
               <i class="bi bi-image text-muted opacity-50 fs-4"></i>
             </div>
           </div>
 
-          <img [src]="img.url" 
+          <img [src]="img.thumbUrl || img.url" 
                [alt]="img.projectName" 
                class="img-fluid w-100 masonry-image" 
-               [class.loaded]="imageLoadedMap[img.url]"
-               (load)="onImageLoad(img.url)"
+               [class.loaded]="imageLoadedMap[img.thumbUrl || img.url]"
+               (load)="onImageLoad(img.thumbUrl || img.url)"
+               (error)="$any($event.target).src = img.url"
                loading="lazy"
                decoding="async">
           
           <!-- Hover Overlay Details -->
-          <div class="masonry-overlay d-flex flex-column justify-content-end p-3 text-white" *ngIf="imageLoadedMap[img.url]">
+          <div class="masonry-overlay d-flex flex-column justify-content-end p-3 text-white" *ngIf="imageLoadedMap[img.thumbUrl || img.url]">
             <span class="badge bg-warning text-dark align-self-start text-uppercase font-headings mb-2" style="font-size: 0.65rem;">
               {{ img.status }}
             </span>

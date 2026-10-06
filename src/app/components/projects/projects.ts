@@ -6,6 +6,7 @@ import { LightboxComponent } from '../lightbox/lightbox';
 
 interface ImageItem {
   url: string;
+  thumbUrl: string;
   projectName: string;
   area: string;
   status: string;
@@ -114,8 +115,10 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     const list: ImageItem[] = [];
     this.projects.forEach(p => {
       p.images.forEach(img => {
+        const thumbUrl = img.replace(/\.webp$/i, '-thumb.webp');
         list.push({
           url: img,
+          thumbUrl: thumbUrl,
           projectName: p.name,
           area: p.area,
           status: p.status,

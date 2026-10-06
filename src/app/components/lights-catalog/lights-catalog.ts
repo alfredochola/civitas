@@ -28,6 +28,11 @@ export class LightsCatalogComponent implements OnInit {
     }
   }
 
+  getThumbnail(url?: string): string {
+    if (!url) return 'assets/logo.png';
+    return url.replace(/\.webp$/i, '-thumb.webp');
+  }
+
   categories = [
     { name: 'All', value: 'all' },
     { name: 'Solar', value: 'solar' },
