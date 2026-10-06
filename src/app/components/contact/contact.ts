@@ -137,7 +137,7 @@ export class ContactComponent implements OnInit {
       );
 
       this.progressPercent = 100;
-      this.progressStepText = 'Message successfully dispatched to Civitas Solutions!';
+      this.progressStepText = 'Message successfully dispatched to Civitas Team!';
       this.submissionState = 'success';
       this.isSubmitting = false;
 
