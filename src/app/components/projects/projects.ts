@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService, Project } from '../../services/data.service';
+import { WatermarkService } from '../../services/watermark.service';
 import { SpinnerComponent } from '../spinner/spinner';
 import { LightboxComponent } from '../lightbox/lightbox';
 
@@ -43,12 +44,19 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   showLightbox = false;
   lightboxImages: string[] = [];
   lightboxIndex = 0;
+  lightboxTitle = '';
+
+  // Download state tracking
+  downloadingUrl: string | null = null;
 
   onImageLoad(url: string): void {
     this.imageLoadedMap[url] = true;
   }
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private watermarkService: WatermarkService
+  ) {}
 
   ngOnInit(): void {
     this.dataService.getProjects().subscribe({
@@ -176,7 +184,23 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lightboxImages = projectImages.map(img => img.url);
     this.lightboxIndex = projectImages.findIndex(img => img.url === clickedImage.url);
     if (this.lightboxIndex === -1) this.lightboxIndex = 0;
+    this.lightboxTitle = clickedImage.projectName;
     
     this.showLightbox = true;
+  }
+
+  async downloadImage(event: Event, item: ImageItem): Promise<void> {
+    event.stopPropagation();
+    event.preventDefault();
+    if (this.downloadingUrl) return;
+
+    this.downloadingUrl = item.url;
+    try {
+      await this.watermarkService.downloadWatermarkedImage(item.url, item.projectName);
+    } catch (err) {
+      console.error('Error downloading watermarked project photo:', err);
+    } finally {
+      this.downloadingUrl = null;
+    }
   }
 }

@@ -49,6 +49,16 @@
             </div>
           </div>
 
+          <!-- Floating Download Button on Thumbnail -->
+          <button class="btn-thumb-download" 
+                  (click)="downloadImage($event, img)"
+                  [disabled]="downloadingUrl === img.url"
+                  [title]="'Download watermarked photo: ' + img.projectName"
+                  aria-label="Download photo">
+            <span *ngIf="downloadingUrl === img.url" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <i *ngIf="downloadingUrl !== img.url" class="bi bi-download"></i>
+          </button>
+
           <img [src]="img.thumbUrl || img.url" 
                [alt]="img.projectName" 
                class="img-fluid w-100 masonry-image" 
@@ -91,5 +101,9 @@
 </div>
 
 <!-- Standalone Lightbox Component -->
-<app-lightbox *ngIf="showLightbox" [images]="lightboxImages" [currentIndex]="lightboxIndex" (close)="showLightbox = false">
+<app-lightbox *ngIf="showLightbox" 
+              [images]="lightboxImages" 
+              [currentIndex]="lightboxIndex" 
+              [title]="lightboxTitle"
+              (close)="showLightbox = false">
 </app-lightbox>

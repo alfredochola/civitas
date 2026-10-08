@@ -35,6 +35,43 @@
   background-color: transparent;
 }
 
+/* Floating Download Button on Masonry Thumbnails */
+.btn-thumb-download {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(21, 21, 21, 0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  z-index: 10;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+
+  &:hover:not(:disabled) {
+    background-color: var(--brand-yellow);
+    color: var(--brand-black);
+    border-color: var(--brand-yellow);
+    transform: scale(1.12);
+    box-shadow: 0 4px 16px rgba(255, 186, 8, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: wait;
+  }
+}
+
 /* Soft Skeleton Shimmer Placeholder (displays during initial image load only) */
 .skeleton-placeholder {
   position: relative;

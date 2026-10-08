@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DataService, Light } from '../../services/data.service';
+import { WatermarkService } from '../../services/watermark.service';
 import { environment } from '../../../environments/environment';
 import { SpinnerComponent } from '../spinner/spinner';
 import { LightboxComponent } from '../lightbox/lightbox';
@@ -16,6 +17,7 @@ export class LightDetailComponent implements OnInit {
   light: Light | undefined;
   isLoading = true;
   activeImage = '';
+  downloadingActive = false;
   
   // Lightbox state
   showLightbox = false;
@@ -23,7 +25,8 @@ export class LightDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataService
+    private dataService: DataService,
+    private watermarkService: WatermarkService
   ) {}
 
   ngOnInit(): void {
@@ -67,5 +70,21 @@ export class LightDetailComponent implements OnInit {
   openLightbox(index: number): void {
     this.lightboxIndex = index;
     this.showLightbox = true;
+  }
+
+  async downloadActiveImage(event: Event): Promise<void> {
+    event.stopPropagation();
+    event.preventDefault();
+    if (this.downloadingActive || !this.activeImage) return;
+
+    this.downloadingActive = true;
+    try {
+      const title = this.light?.productName || 'Lighting-Fixture';
+      await this.watermarkService.downloadWatermarkedImage(this.activeImage, title);
+    } catch (err) {
+      console.error('Error downloading watermarked lighting photo:', err);
+    } finally {
+      this.downloadingActive = false;
+    }
   }
 }

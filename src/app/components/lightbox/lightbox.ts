@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WatermarkService } from '../../services/watermark.service';
 
 @Component({
   selector: 'app-lightbox',
@@ -9,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class LightboxComponent {
   @Input() images: string[] = [];
+  @Input() title: string = '';
   
   private _currentIndex = 0;
   @Input() 
@@ -23,6 +25,27 @@ export class LightboxComponent {
   @Output() close = new EventEmitter<void>();
 
   imageLoading = true;
+  isDownloading = false;
+
+  constructor(private watermarkService: WatermarkService) {}
+
+  async downloadCurrent(event?: Event): Promise<void> {
+    if (event) {
+      event.stopPropagation();
+    }
+    if (this.isDownloading || !this.images || !this.images[this.currentIndex]) return;
+
+    this.isDownloading = true;
+    try {
+      const currentUrl = this.images[this.currentIndex];
+      const filenameTitle = this.title ? `${this.title}-${this.currentIndex + 1}` : 'Photo';
+      await this.watermarkService.downloadWatermarkedImage(currentUrl, filenameTitle);
+    } catch (err) {
+      console.error('Error generating watermarked download:', err);
+    } finally {
+      this.isDownloading = false;
+    }
+  }
 
   onImageLoad(): void {
     this.imageLoading = false;

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DataService, Light } from '../../services/data.service';
+import { WatermarkService } from '../../services/watermark.service';
 import { SpinnerComponent } from '../spinner/spinner';
 
 @Component({
@@ -18,6 +19,9 @@ export class LightsCatalogComponent implements OnInit {
 
   searchQuery = '';
   selectedCategory = 'all';
+
+  // Download state tracking
+  downloadingId: string | null = null;
 
   // Image load state tracking
   imageLoadedMap: { [url: string]: boolean } = {};
@@ -43,7 +47,10 @@ export class LightsCatalogComponent implements OnInit {
     { name: 'Candelabrums', value: 'candelabrum' }
   ];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private watermarkService: WatermarkService
+  ) {}
 
   ngOnInit(): void {
     this.dataService.getLights().subscribe({
@@ -104,5 +111,21 @@ export class LightsCatalogComponent implements OnInit {
     }
 
     this.filteredLights = result;
+  }
+
+  async downloadLightImage(event: Event, item: Light): Promise<void> {
+    event.stopPropagation();
+    event.preventDefault();
+    if (this.downloadingId || !item.images || item.images.length === 0) return;
+
+    this.downloadingId = item.id;
+    try {
+      const fullImgUrl = item.images[0];
+      await this.watermarkService.downloadWatermarkedImage(fullImgUrl, item.productName);
+    } catch (err) {
+      console.error('Error downloading watermarked lighting photo:', err);
+    } finally {
+      this.downloadingId = null;
+    }
   }
 }

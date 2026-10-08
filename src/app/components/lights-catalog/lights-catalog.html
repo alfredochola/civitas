@@ -42,6 +42,16 @@
               <div class="skeleton-shimmer"></div>
             </div>
 
+            <!-- Floating Download Button on Thumbnail -->
+            <button class="btn-thumb-download" 
+                    (click)="downloadLightImage($event, item)"
+                    [disabled]="downloadingId === item.id"
+                    [title]="'Download watermarked photo: ' + item.productName"
+                    aria-label="Download photo">
+              <span *ngIf="downloadingId === item.id" class="spinner-border spinner-border-sm" role="status"></span>
+              <i *ngIf="downloadingId !== item.id" class="bi bi-download"></i>
+            </button>
+
             <img [src]="getThumbnail(item.images && item.images.length > 0 ? item.images[0] : '')" 
                  [alt]="item.productName" 
                  class="card-img-top product-image"
