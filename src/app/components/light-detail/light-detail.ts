@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { DataService, Light } from '../../services/data.service';
 import { WatermarkService } from '../../services/watermark.service';
+import { ContextMenuService } from '../../services/context-menu.service';
 import { environment } from '../../../environments/environment';
 import { SpinnerComponent } from '../spinner/spinner';
 import { LightboxComponent } from '../lightbox/lightbox';
@@ -17,7 +18,6 @@ export class LightDetailComponent implements OnInit {
   light: Light | undefined;
   isLoading = true;
   activeImage = '';
-  downloadingActive = false;
   
   // Lightbox state
   showLightbox = false;
@@ -26,7 +26,8 @@ export class LightDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private watermarkService: WatermarkService
+    private watermarkService: WatermarkService,
+    private contextMenuService: ContextMenuService
   ) {}
 
   ngOnInit(): void {
@@ -72,19 +73,14 @@ export class LightDetailComponent implements OnInit {
     this.showLightbox = true;
   }
 
-  async downloadActiveImage(event: Event): Promise<void> {
-    event.stopPropagation();
-    event.preventDefault();
-    if (this.downloadingActive || !this.activeImage) return;
-
-    this.downloadingActive = true;
-    try {
-      const title = this.light?.productName || 'Lighting-Fixture';
-      await this.watermarkService.downloadWatermarkedImage(this.activeImage, title);
-    } catch (err) {
-      console.error('Error downloading watermarked lighting photo:', err);
-    } finally {
-      this.downloadingActive = false;
-    }
+  onContextMenu(event: MouseEvent): void {
+    if (!this.activeImage) return;
+    const activeIndex = this.light?.images ? this.light.images.indexOf(this.activeImage) : 0;
+    this.contextMenuService.open(
+      event,
+      this.activeImage,
+      this.light?.productName || 'Lighting-Fixture',
+      () => this.openLightbox(activeIndex >= 0 ? activeIndex : 0)
+    );
   }
 }

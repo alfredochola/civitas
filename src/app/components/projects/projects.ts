@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } fr
 import { CommonModule } from '@angular/common';
 import { DataService, Project } from '../../services/data.service';
 import { WatermarkService } from '../../services/watermark.service';
+import { ContextMenuService } from '../../services/context-menu.service';
 import { SpinnerComponent } from '../spinner/spinner';
 import { LightboxComponent } from '../lightbox/lightbox';
 
@@ -46,16 +47,14 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
   lightboxIndex = 0;
   lightboxTitle = '';
 
-  // Download state tracking
-  downloadingUrl: string | null = null;
-
   onImageLoad(url: string): void {
     this.imageLoadedMap[url] = true;
   }
 
   constructor(
     private dataService: DataService,
-    private watermarkService: WatermarkService
+    private watermarkService: WatermarkService,
+    private contextMenuService: ContextMenuService
   ) {}
 
   ngOnInit(): void {
@@ -189,18 +188,12 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showLightbox = true;
   }
 
-  async downloadImage(event: Event, item: ImageItem): Promise<void> {
-    event.stopPropagation();
-    event.preventDefault();
-    if (this.downloadingUrl) return;
-
-    this.downloadingUrl = item.url;
-    try {
-      await this.watermarkService.downloadWatermarkedImage(item.url, item.projectName);
-    } catch (err) {
-      console.error('Error downloading watermarked project photo:', err);
-    } finally {
-      this.downloadingUrl = null;
-    }
+  onContextMenu(event: MouseEvent, item: ImageItem, index: number): void {
+    this.contextMenuService.open(
+      event,
+      item.url,
+      item.projectName,
+      () => this.openLightbox(index)
+    );
   }
 }

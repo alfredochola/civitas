@@ -39,7 +39,7 @@
     <!-- Masonry Grid -->
     <div class="masonry-container" *ngIf="displayedImages.length > 0">
       <div class="masonry-item position-relative shadow-sm rounded overflow-hidden" *ngFor="let img of displayedImages; let i = index">
-        <div class="masonry-img-wrapper" (click)="openLightbox(i)">
+        <div class="masonry-img-wrapper" (click)="openLightbox(i)" (contextmenu)="onContextMenu($event, img, i)">
           
           <!-- Soft Skeleton Shimmer Placeholder (Shows only while loading) -->
           <div *ngIf="!imageLoadedMap[img.thumbUrl || img.url]" class="skeleton-placeholder w-100">
@@ -48,16 +48,6 @@
               <i class="bi bi-image text-muted opacity-50 fs-4"></i>
             </div>
           </div>
-
-          <!-- Floating Download Button on Thumbnail -->
-          <button class="btn-thumb-download" 
-                  (click)="downloadImage($event, img)"
-                  [disabled]="downloadingUrl === img.url"
-                  [title]="'Download watermarked photo: ' + img.projectName"
-                  aria-label="Download photo">
-            <span *ngIf="downloadingUrl === img.url" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <i *ngIf="downloadingUrl !== img.url" class="bi bi-download"></i>
-          </button>
 
           <img [src]="img.thumbUrl || img.url" 
                [alt]="img.projectName" 

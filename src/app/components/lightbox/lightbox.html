@@ -1,20 +1,8 @@
 <div class="lightbox-overlay d-flex flex-column justify-content-center align-items-center" (click)="close.emit()">
-  <!-- Top Bar Controls -->
-  <div class="lightbox-top-bar d-flex align-items-center gap-2 gap-sm-3">
-    <button class="btn-top-download d-flex align-items-center gap-2" 
-            (click)="downloadCurrent($event)" 
-            [disabled]="isDownloading"
-            title="Download watermarked high-res photo"
-            aria-label="Download photo">
-      <span *ngIf="isDownloading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <i *ngIf="!isDownloading" class="bi bi-download"></i>
-      <span class="d-none d-sm-inline">{{ isDownloading ? 'Preparing...' : 'Download Watermarked' }}</span>
-    </button>
-
-    <button class="btn-close-lightbox" (click)="close.emit(); $event.stopPropagation()" aria-label="Close">
-      <i class="bi bi-x-lg"></i>
-    </button>
-  </div>
+  <!-- Close Button -->
+  <button class="btn-close-lightbox" (click)="close.emit(); $event.stopPropagation()" aria-label="Close">
+    <i class="bi bi-x-lg"></i>
+  </button>
 
   <!-- Main Image Container -->
   <div class="lightbox-content-container d-flex align-items-center justify-content-center" (click)="$event.stopPropagation()">
@@ -32,25 +20,13 @@
         </div>
       </div>
       
-      <!-- Frame with Floating Download Button directly on Photo -->
-      <div class="position-relative d-inline-block image-frame">
+      <!-- Image Frame (Clean, without floating button obstruction) -->
+      <div class="position-relative d-inline-block image-frame" (contextmenu)="onContextMenu($event)">
         <img [src]="images[currentIndex]" 
              alt="Full screen preview" 
              class="lightbox-image"
              [class.loaded]="!imageLoading"
              (load)="onImageLoad()">
-
-        <!-- Floating download button directly on photo -->
-        <button *ngIf="!imageLoading"
-                class="btn-floating-download shadow-lg"
-                (click)="downloadCurrent($event)"
-                [disabled]="isDownloading"
-                title="Download watermarked photo"
-                aria-label="Download photo">
-          <span *ngIf="isDownloading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-          <i *ngIf="!isDownloading" class="bi bi-download me-2"></i>
-          <span>{{ isDownloading ? 'Processing...' : 'Download' }}</span>
-        </button>
       </div>
             
       <div class="lightbox-caption mt-3 text-white-50 small font-headings font-uppercase">

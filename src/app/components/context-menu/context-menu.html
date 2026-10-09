@@ -1,0 +1,50 @@
+<div *ngIf="menuService.isOpen" 
+     class="custom-context-menu shadow-lg"
+     [style.left.px]="menuService.x"
+     [style.top.px]="menuService.y"
+     (click)="onMenuClick($event)"
+     role="menu"
+     aria-label="Civitas Image Options">
+  
+  <!-- Header / Title -->
+  <div class="menu-header px-3 py-2 border-bottom border-secondary-subtle d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center gap-2 overflow-hidden">
+      <img src="assets/logo-white.png" alt="Civitas" class="menu-brand-icon">
+      <span class="small fw-bold text-uppercase text-truncate menu-title" [title]="menuService.title">
+        {{ menuService.title }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Menu Actions List -->
+  <div class="menu-items py-1">
+    <!-- Save Image As Option (Centered Watermark) -->
+    <button class="menu-item w-100 d-flex align-items-center text-start px-3 py-2 border-0 bg-transparent"
+            (click)="menuService.download()"
+            [disabled]="menuService.isDownloading"
+            role="menuitem">
+      <div class="menu-icon-wrapper me-2 text-warning d-flex align-items-center justify-content-center">
+        <span *ngIf="menuService.isDownloading" class="spinner-border spinner-border-sm" role="status"></span>
+        <i *ngIf="!menuService.isDownloading" class="bi bi-download"></i>
+      </div>
+      <span class="menu-action-label">Save Image As...</span>
+    </button>
+
+    <!-- Fullscreen Option (if available) -->
+    <button *ngIf="menuService.onFullscreen"
+            class="menu-item w-100 d-flex align-items-center text-start px-3 py-2 border-0 bg-transparent"
+            (click)="menuService.triggerFullscreen()"
+            role="menuitem">
+      <div class="menu-icon-wrapper me-2 text-warning d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrows-fullscreen"></i>
+      </div>
+      <span class="menu-action-label">View Fullscreen</span>
+    </button>
+  </div>
+
+  <!-- Footer badge -->
+  <div class="menu-footer px-3 py-1 bg-black bg-opacity-25 border-top border-secondary-subtle d-flex align-items-center justify-content-between">
+    <span class="menu-footer-text">Protected by Civitas</span>
+    <i class="bi bi-shield-check text-warning" style="font-size: 0.75rem;"></i>
+  </div>
+</div>

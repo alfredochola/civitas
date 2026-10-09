@@ -11,7 +11,7 @@ export interface WatermarkOptions {
   providedIn: 'root'
 })
 export class WatermarkService {
-  private logoUrl = 'assets/logo-w.png';
+  private logoUrl = 'assets/logo-white.png';
   private cachedLogo?: HTMLImageElement;
   private logoLoadPromise?: Promise<HTMLImageElement>;
 
@@ -53,9 +53,9 @@ export class WatermarkService {
     options: WatermarkOptions = {}
   ): Promise<void> {
     const {
-      position = 'top-left',
-      opacity = 0.88,
-      scaleRatio = 0.18,
+      position = 'center',
+      opacity = 0.50,
+      scaleRatio = 0.26,
       quality = 0.90
     } = options;
 

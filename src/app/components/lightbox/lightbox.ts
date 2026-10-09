@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WatermarkService } from '../../services/watermark.service';
+import { ContextMenuService } from '../../services/context-menu.service';
 
 @Component({
   selector: 'app-lightbox',
@@ -27,7 +28,17 @@ export class LightboxComponent {
   imageLoading = true;
   isDownloading = false;
 
-  constructor(private watermarkService: WatermarkService) {}
+  constructor(
+    private watermarkService: WatermarkService,
+    private contextMenuService: ContextMenuService
+  ) {}
+
+  onContextMenu(event: MouseEvent): void {
+    if (!this.images || !this.images[this.currentIndex]) return;
+    const currentUrl = this.images[this.currentIndex];
+    const filenameTitle = this.title ? `${this.title}-${this.currentIndex + 1}` : 'Photo';
+    this.contextMenuService.open(event, currentUrl, filenameTitle);
+  }
 
   async downloadCurrent(event?: Event): Promise<void> {
     if (event) {

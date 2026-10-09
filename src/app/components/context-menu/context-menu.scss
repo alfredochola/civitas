@@ -1,0 +1,99 @@
+.custom-context-menu {
+  position: fixed;
+  z-index: 3500;
+  min-width: 260px;
+  max-width: 320px;
+  background: rgba(21, 21, 21, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  color: #ffffff;
+  overflow: hidden;
+  user-select: none;
+  animation: contextMenuPop 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 186, 8, 0.2);
+}
+
+@keyframes contextMenuPop {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.menu-header {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.menu-brand-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.menu-title {
+  font-family: var(--font-headings);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 190px;
+}
+
+.menu-item {
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 186, 8, 0.14) !important;
+    color: var(--brand-yellow);
+
+    .menu-action-label {
+      color: var(--brand-yellow);
+    }
+
+    .menu-icon-wrapper {
+      transform: scale(1.1);
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+}
+
+.menu-icon-wrapper {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.menu-action-label {
+  font-family: var(--font-headings);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  line-height: 1.2;
+}
+
+.menu-footer-text {
+  font-size: 0.68rem;
+  font-family: var(--font-headings);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}

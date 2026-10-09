@@ -36,21 +36,11 @@
       <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let item of filteredLights">
         <div class="card h-100 product-card border-light shadow-sm">
           <!-- Product Image -->
-          <div class="product-img-wrapper overflow-hidden bg-light position-relative" [routerLink]="['/lights', item.id]">
+          <div class="product-img-wrapper overflow-hidden bg-light position-relative" [routerLink]="['/lights', item.id]" (contextmenu)="onContextMenu($event, item)">
             <!-- Soft Skeleton Shimmer Placeholder -->
             <div *ngIf="!imageLoadedMap[getThumbnail(item.images && item.images.length > 0 ? item.images[0] : '')]" class="skeleton-placeholder">
               <div class="skeleton-shimmer"></div>
             </div>
-
-            <!-- Floating Download Button on Thumbnail -->
-            <button class="btn-thumb-download" 
-                    (click)="downloadLightImage($event, item)"
-                    [disabled]="downloadingId === item.id"
-                    [title]="'Download watermarked photo: ' + item.productName"
-                    aria-label="Download photo">
-              <span *ngIf="downloadingId === item.id" class="spinner-border spinner-border-sm" role="status"></span>
-              <i *ngIf="downloadingId !== item.id" class="bi bi-download"></i>
-            </button>
 
             <img [src]="getThumbnail(item.images && item.images.length > 0 ? item.images[0] : '')" 
                  [alt]="item.productName" 
