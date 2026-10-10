@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { WatermarkService } from './watermark.service';
 
+export interface ContextMenuTriggerEvent {
+  clientX: number;
+  clientY: number;
+  preventDefault?: () => void;
+  stopPropagation?: () => void;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,24 +19,51 @@ export class ContextMenuService {
   title = '';
   isDownloading = false;
   onFullscreen?: () => void;
+  isMobile = false;
+  justOpened = false;
+  private justOpenedTimer: any = null;
 
   constructor(private watermarkService: WatermarkService) {}
 
-  open(event: MouseEvent, imageUrl: string, title?: string, onFullscreen?: () => void): void {
-    event.preventDefault();
-    event.stopPropagation();
+  open(
+    event: ContextMenuTriggerEvent | MouseEvent | TouchEvent,
+    imageUrl: string,
+    title?: string,
+    onFullscreen?: () => void
+  ): void {
+    if (typeof event.preventDefault === 'function') {
+      event.preventDefault();
+    }
+    if (typeof event.stopPropagation === 'function') {
+      event.stopPropagation();
+    }
 
     this.imageUrl = imageUrl;
-    this.title = title || 'Project';
+    this.title = title || 'Civitas Project';
     this.onFullscreen = onFullscreen;
     this.isDownloading = false;
 
-    // Viewport boundary detection
+    if (typeof window !== 'undefined') {
+      this.isMobile = window.innerWidth <= 768;
+    }
+
+    // Viewport boundary detection for desktop
     const menuWidth = 270;
     const menuHeight = onFullscreen ? 145 : 100;
-    
-    let posX = event.clientX;
-    let posY = event.clientY;
+
+    let posX = 0;
+    let posY = 0;
+
+    if ('clientX' in event && typeof (event as any).clientX === 'number') {
+      posX = (event as any).clientX;
+      posY = (event as any).clientY;
+    } else if ('touches' in event && (event as TouchEvent).touches && (event as TouchEvent).touches.length > 0) {
+      posX = (event as TouchEvent).touches[0].clientX;
+      posY = (event as TouchEvent).touches[0].clientY;
+    } else if ('changedTouches' in event && (event as TouchEvent).changedTouches && (event as TouchEvent).changedTouches.length > 0) {
+      posX = (event as TouchEvent).changedTouches[0].clientX;
+      posY = (event as TouchEvent).changedTouches[0].clientY;
+    }
 
     if (typeof window !== 'undefined') {
       if (posX + menuWidth > window.innerWidth) {
@@ -45,11 +79,19 @@ export class ContextMenuService {
     this.x = posX;
     this.y = posY;
     this.isOpen = true;
+
+    // Guard against synthetic click on touch release
+    this.justOpened = true;
+    clearTimeout(this.justOpenedTimer);
+    this.justOpenedTimer = setTimeout(() => {
+      this.justOpened = false;
+    }, 450);
   }
 
   close(): void {
     this.isOpen = false;
     this.isDownloading = false;
+    this.justOpened = false;
   }
 
   async download(): Promise<void> {

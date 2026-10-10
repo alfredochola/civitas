@@ -5,6 +5,7 @@ import { WatermarkService } from '../../services/watermark.service';
 import { ContextMenuService } from '../../services/context-menu.service';
 import { SpinnerComponent } from '../spinner/spinner';
 import { LightboxComponent } from '../lightbox/lightbox';
+import { ImageContextMenuDirective } from '../../directives/image-context-menu.directive';
 
 interface ImageItem {
   url: string;
@@ -17,7 +18,7 @@ interface ImageItem {
 
 @Component({
   selector: 'app-projects',
-  imports: [CommonModule, SpinnerComponent, LightboxComponent],
+  imports: [CommonModule, SpinnerComponent, LightboxComponent, ImageContextMenuDirective],
   templateUrl: './projects.html',
   styleUrl: './projects.scss'
 })
@@ -186,6 +187,10 @@ export class ProjectsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.lightboxTitle = clickedImage.projectName;
     
     this.showLightbox = true;
+  }
+
+  getFullscreenFn(index: number): () => void {
+    return () => this.openLightbox(index);
   }
 
   onContextMenu(event: MouseEvent, item: ImageItem, index: number): void {

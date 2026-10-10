@@ -170,3 +170,22 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Mobile Image Protection: Disable OS callout / raw save sheets on all portfolio images */
+.masonry-img-wrapper,
+.masonry-img-wrapper img,
+.image-frame,
+.image-frame img,
+.product-img-wrapper,
+.product-img-wrapper img,
+.main-image-preview,
+.main-image-preview img,
+img.lightbox-image,
+[appImageContextMenu],
+[appImageContextMenu] img {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+

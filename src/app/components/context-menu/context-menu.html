@@ -1,8 +1,16 @@
+<!-- Full-screen backdrop for easy mobile touch dismissal -->
+<div *ngIf="menuService.isOpen" 
+     class="custom-context-backdrop"
+     (click)="menuService.close()"
+     (touchstart)="menuService.close()"></div>
+
 <div *ngIf="menuService.isOpen" 
      class="custom-context-menu shadow-lg"
-     [style.left.px]="menuService.x"
-     [style.top.px]="menuService.y"
+     [class.is-mobile]="menuService.isMobile"
+     [style.left.px]="menuService.isMobile ? null : menuService.x"
+     [style.top.px]="menuService.isMobile ? null : menuService.y"
      (click)="onMenuClick($event)"
+     (touchstart)="onMenuClick($event)"
      role="menu"
      aria-label="Civitas Image Options">
   
@@ -14,6 +22,10 @@
         {{ menuService.title }}
       </span>
     </div>
+    <!-- Close icon for touch convenience on mobile -->
+    <button class="btn-close-menu d-md-none text-white-50 border-0 bg-transparent p-0" (click)="menuService.close()" aria-label="Close menu">
+      <i class="bi bi-x-lg"></i>
+    </button>
   </div>
 
   <!-- Menu Actions List -->
@@ -27,7 +39,10 @@
         <span *ngIf="menuService.isDownloading" class="spinner-border spinner-border-sm" role="status"></span>
         <i *ngIf="!menuService.isDownloading" class="bi bi-download"></i>
       </div>
-      <span class="menu-action-label">Save Image As...</span>
+      <div class="d-flex flex-column">
+        <span class="menu-action-label">Save Image As...</span>
+        <span class="text-white-50 extra-small d-md-none" style="font-size: 0.72rem;">Branded with official Civitas watermark</span>
+      </div>
     </button>
 
     <!-- Fullscreen Option (if available) -->
@@ -41,6 +56,12 @@
       <span class="menu-action-label">View Fullscreen</span>
     </button>
   </div>
+
+  <!-- Mobile Cancel Button -->
+  <button class="menu-item menu-item-cancel w-100 d-md-none text-center py-2 border-top border-secondary-subtle bg-transparent"
+          (click)="menuService.close()">
+    <span class="text-white-50 small text-uppercase fw-semibold">Cancel</span>
+  </button>
 
   <!-- Footer badge -->
   <div class="menu-footer px-3 py-1 bg-black bg-opacity-25 border-top border-secondary-subtle d-flex align-items-center justify-content-between">

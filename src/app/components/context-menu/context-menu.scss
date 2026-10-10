@@ -1,18 +1,34 @@
+.custom-context-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 3499;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeInBackdrop 0.18s ease-out forwards;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .custom-context-menu {
   position: fixed;
   z-index: 3500;
   min-width: 260px;
   max-width: 320px;
-  background: rgba(21, 21, 21, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(21, 21, 21, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 10px;
+  border-radius: 12px;
   color: #ffffff;
   overflow: hidden;
   user-select: none;
+  -webkit-user-select: none;
   animation: contextMenuPop 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 186, 8, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 186, 8, 0.2);
 }
 
 @keyframes contextMenuPop {
@@ -27,7 +43,7 @@
 }
 
 .menu-header {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .menu-brand-icon {
@@ -42,6 +58,16 @@
   letter-spacing: 0.5px;
   color: rgba(255, 255, 255, 0.85);
   max-width: 190px;
+}
+
+.btn-close-menu {
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+  &:hover {
+    color: #ffffff !important;
+  }
 }
 
 .menu-item {
@@ -91,9 +117,68 @@
 }
 
 .menu-footer-text {
+  font-family: var(--font-body);
   font-size: 0.68rem;
-  font-family: var(--font-headings);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  letter-spacing: 0.4px;
   color: rgba(255, 255, 255, 0.45);
+  text-transform: uppercase;
+}
+
+/* Mobile responsive bottom-sheet display */
+@media (max-width: 768px) {
+  .custom-context-menu {
+    left: 14px !important;
+    right: 14px !important;
+    bottom: 24px !important;
+    top: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    border-radius: 18px;
+    animation: slideUpMobile 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 186, 8, 0.3);
+
+    .menu-header {
+      padding: 12px 18px !important;
+    }
+
+    .menu-title {
+      font-size: 0.82rem;
+      max-width: 220px;
+    }
+
+    .menu-brand-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .menu-item {
+      padding: 14px 18px !important;
+    }
+
+    .menu-icon-wrapper {
+      width: 36px;
+      height: 36px;
+      font-size: 1.15rem;
+    }
+
+    .menu-action-label {
+      font-size: 0.95rem;
+    }
+
+    .menu-footer {
+      padding: 8px 18px !important;
+    }
+  }
+
+  @keyframes slideUpMobile {
+    from {
+      opacity: 0;
+      transform: translateY(35px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

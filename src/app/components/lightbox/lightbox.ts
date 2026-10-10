@@ -2,10 +2,11 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { WatermarkService } from '../../services/watermark.service';
 import { ContextMenuService } from '../../services/context-menu.service';
+import { ImageContextMenuDirective } from '../../directives/image-context-menu.directive';
 
 @Component({
   selector: 'app-lightbox',
-  imports: [CommonModule],
+  imports: [CommonModule, ImageContextMenuDirective],
   templateUrl: './lightbox.html',
   styleUrl: './lightbox.scss'
 })

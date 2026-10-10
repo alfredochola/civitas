@@ -7,10 +7,11 @@ import { ContextMenuService } from '../../services/context-menu.service';
 import { environment } from '../../../environments/environment';
 import { SpinnerComponent } from '../spinner/spinner';
 import { LightboxComponent } from '../lightbox/lightbox';
+import { ImageContextMenuDirective } from '../../directives/image-context-menu.directive';
 
 @Component({
   selector: 'app-light-detail',
-  imports: [CommonModule, RouterModule, SpinnerComponent, LightboxComponent],
+  imports: [CommonModule, RouterModule, SpinnerComponent, LightboxComponent, ImageContextMenuDirective],
   templateUrl: './light-detail.html',
   styleUrl: './light-detail.scss'
 })

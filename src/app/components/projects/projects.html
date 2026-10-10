@@ -39,7 +39,9 @@
     <!-- Masonry Grid -->
     <div class="masonry-container" *ngIf="displayedImages.length > 0">
       <div class="masonry-item position-relative shadow-sm rounded overflow-hidden" *ngFor="let img of displayedImages; let i = index">
-        <div class="masonry-img-wrapper" (click)="openLightbox(i)" (contextmenu)="onContextMenu($event, img, i)">
+        <div class="masonry-img-wrapper" 
+             (click)="openLightbox(i)" 
+             [appImageContextMenu]="{ url: img.url, title: img.projectName, onFullscreen: getFullscreenFn(i) }">
           
           <!-- Soft Skeleton Shimmer Placeholder (Shows only while loading) -->
           <div *ngIf="!imageLoadedMap[img.thumbUrl || img.url]" class="skeleton-placeholder w-100">

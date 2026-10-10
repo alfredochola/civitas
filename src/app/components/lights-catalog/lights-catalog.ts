@@ -6,10 +6,11 @@ import { DataService, Light } from '../../services/data.service';
 import { WatermarkService } from '../../services/watermark.service';
 import { ContextMenuService } from '../../services/context-menu.service';
 import { SpinnerComponent } from '../spinner/spinner';
+import { ImageContextMenuDirective } from '../../directives/image-context-menu.directive';
 
 @Component({
   selector: 'app-lights-catalog',
-  imports: [CommonModule, FormsModule, RouterModule, SpinnerComponent],
+  imports: [CommonModule, FormsModule, RouterModule, SpinnerComponent, ImageContextMenuDirective],
   templateUrl: './lights-catalog.html',
   styleUrl: './lights-catalog.scss'
 })

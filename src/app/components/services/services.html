@@ -81,7 +81,7 @@
              style="object-fit: cover; max-height: 380px; cursor: pointer;"
              loading="lazy"
              decoding="async"
-             (contextmenu)="onContextMenu($event, 'assets/images/lights/black Nile beacon.webp', 'Lighting-Maintenance')">
+             [appImageContextMenu]="{ url: 'assets/images/lights/black Nile beacon.webp', title: 'Lighting-Maintenance' }">
       </div>
     </div>
   </div>
@@ -96,7 +96,7 @@
              style="object-fit: cover; max-height: 380px; cursor: pointer;"
              loading="lazy"
              decoding="async"
-             (contextmenu)="onContextMenu($event, 'assets/images/projects/ALLAN 5bedrooms 2022/Allan 5bedroom lyantonde farm house (1).webp', 'Construction-Management')">
+             [appImageContextMenu]="{ url: 'assets/images/projects/ALLAN 5bedrooms 2022/Allan 5bedroom lyantonde farm house (1).webp', title: 'Construction-Management' }">
       </div>
     </div>
 

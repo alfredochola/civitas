@@ -20,8 +20,9 @@
         </div>
       </div>
       
-      <!-- Image Frame (Clean, without floating button obstruction) -->
-      <div class="position-relative d-inline-block image-frame" (contextmenu)="onContextMenu($event)">
+      <!-- Image Frame (Clean, without floating button obstruction, supports right-click and mobile touch-and-hold) -->
+      <div class="position-relative d-inline-block image-frame" 
+           [appImageContextMenu]="{ url: images[currentIndex], title: title ? (title + '-' + (currentIndex + 1)) : 'Civitas-Photo' }">
         <img [src]="images[currentIndex]" 
              alt="Full screen preview" 
              class="lightbox-image"
